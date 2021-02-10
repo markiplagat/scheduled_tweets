@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fas fa-dove">
   <%= link_to "Mark", root_path, class:"navbar-brand"%>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -27,9 +27,30 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <% if Current.user %>
+        <li class="nav-item">
+        <span class="nav-bar-text"><%= Current.user.email %></span>
+        </li>
+        <li class="nav-item">
+        <%= button_to "Logout", logout_path, method: :delete,class: "btn btn-outline-secondary" %>
+        </li>
+        <% else %>
+        <li class="nav-item">
+      <%= link_to "Sign Up", sign_up_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Login", sign_in_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+    <% if @user %>
+      Logged in as:<%= @user.email %>
+      <%= button_to "Logout", logout_path, method: :delete %>
+    <% end %>
+<!--    <form class="form-inline my-2 my-lg-0">-->
+<!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--    </form>-->
   </div>
 </nav>
